@@ -1,1 +1,29 @@
-<p>cabecero works!</p>
+<nav class="navbar navbar-expand-lg"> 
+    <div class="container"> 
+        <!-- Enlace a la página principal (Izquierda) --> 
+        <a [routerLink]="['/']" class="navbar-brand">Control Clientes</a> 
+        <!-- Botón para colapsar la barra de navegación en pantallas pequeñas --> 
+        <button class="navbar-toggler" type="button"  
+            data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+            aria-controls="navbarCollapse"  
+            aria-expanded="false" aria-label="Toggle navigation"> 
+            <span class="navbar-toggler-icon"></span> 
+        </button>
+         <!-- Contenido de la barra de navegación --> 
+        <div class="collapse navbar-collapse" id="navbarCollapse"> 
+            <ul class="navbar-nav me-auto"> 
+                <li class="nav-item px-2"> 
+                    <a [routerLink]="['/']" class="nav-link">Inicio</a> 
+                </li> 
+            </ul> 
+            <!-- Alineado a la derecha pero dentro de los márgenes --> 
+            <ul class="navbar-nav"> 
+                <li class="nav-item px-2"> 
+                    <a [routerLink]="['/']" class="nav-link"> 
+                        <i class="bi bi-person-circle"></i> Bienvenido 
+                    </a> 
+                </li> 
+            </ul> 
+        </div> 
+    </div>    
+ </nav>
