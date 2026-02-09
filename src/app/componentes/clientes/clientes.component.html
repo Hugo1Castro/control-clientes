@@ -57,7 +57,7 @@
                         </h4> 
                     </div> 
                 </div> 
-                
+
                 <div class="card text-center bg-success text-white mb-3"> 
                     <div class="card-body"> 
                         <h3>Total Clientes</h3> 
@@ -70,3 +70,61 @@
         </div> 
     </div> 
 </section>
+
+<!-- Modal para agregar Clientes -->
+<div class="modal fade" id="agregarClienteModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Encabezado del modal -->
+             <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Agregar Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">                    
+                </button>
+             </div>
+             <!-- Formulario para agregar cliente -->
+            <form>
+                <div class="modal-body">
+                    <!-- Campo Nombre -->
+                     <div class="d-flex aling-items-center mb-3">
+                        <label  for="nombre" class="form-label me-3" style="min-width: 100px;" >
+                            Nombre</label>
+                         <input type="text" id="nombre" name="nombre"  
+                            class="form-control" required />
+                     </div>
+                </div>
+                     <!-- Campo de Apellido --> 
+                    <div class="d-flex align-items-center mb-3"> 
+                        <label for="apellido" class="form-label me-3"  
+                            style="min-width: 100px;">Apellido</label> 
+                        <input type="text" id="apellido" name="apellido"  
+                            class="form-control" required /> 
+                    </div> 
+ 
+                    <!-- Campo de Email --> 
+                    <div class="d-flex align-items-center mb-3"> 
+                        <label for="email" class="form-label me-3"  
+                            style="min-width: 100px;">Email</label> 
+                        <input type="email" id="email" name="email"  
+                            class="form-control" required /> 
+                    </div> 
+ 
+                    <!-- Campo de Saldo --> 
+                    <div class="d-flex align-items-center mb-3"> 
+                        <label for="saldo" class="form-label me-3"  
+                            style="min-width: 100px;">Saldo</label> 
+                        <input type="number" id="saldo" name="saldo"  
+                            class="form-control" required /> 
+                    </div> 
+
+ 
+                <!-- Footer del modal con el botón de guardar --> 
+                <div class="modal-footer"> 
+                    <button type="submit" class="btn btn-primary">Guardar</button> 
+                </div> 
+            </form>
+
+
+        </div>
+
+    </div>
+</div>
