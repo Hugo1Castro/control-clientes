@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, Firestore, orderBy, query } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, doc, docData, Firestore, orderBy, query } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Cliente } from '../modelo/cliente.modelo';
 
@@ -24,6 +24,15 @@ return this.clientes;
 
 agregarCliente(cliente: Cliente) { 
     return addDoc(this.clientesRef, cliente);   
+} 
+
+// Obtener un cliente por ID 
+  getCliente(id: string): Observable<Cliente | null> { 
+    // Usamos 'doc' para obtener la referencia al documento y 'docData' para obtener los datos 
+    const clienteDocRef = doc(this.firestore, `clientes/${id}`); 
+ 
+    // Retornamos los datos como un Observable 
+    return docData(clienteDocRef, { idField: 'id' }) as Observable<Cliente>; 
   } 
 } 
 
