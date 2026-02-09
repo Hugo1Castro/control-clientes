@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, doc, docData, Firestore, orderBy, query } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, docData, Firestore, orderBy, query, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Cliente } from '../modelo/cliente.modelo';
 
@@ -30,9 +30,18 @@ agregarCliente(cliente: Cliente) {
   getCliente(id: string): Observable<Cliente | null> { 
     // Usamos 'doc' para obtener la referencia al documento y 'docData' para obtener los datos 
     const clienteDocRef = doc(this.firestore, `clientes/${id}`); 
- 
     // Retornamos los datos como un Observable 
     return docData(clienteDocRef, { idField: 'id' }) as Observable<Cliente>; 
+  }
+  
+  modificarCliente(cliente: Cliente) { 
+    const clienteDoc = doc(this.firestore, `clientes/${cliente.id}`); 
+    return updateDoc(clienteDoc, { ...cliente }); // Actualizamos el documento con los nuevos datos 
   } 
+
+  eliminarCliente(cliente: Cliente) { 
+    const clienteDoc = doc(this.firestore, `clientes/${cliente.id}`); 
+    return deleteDoc(clienteDoc); // Eliminamos el documento por su ID 
+  }
 } 
 
