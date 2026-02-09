@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Cliente } from '../../modelo/cliente.modelo';
 import { CommonModule } from '@angular/common';
 import { ClienteService } from '../../servicios/cliente.service';
@@ -22,6 +22,7 @@ export class ClientesComponent {
     email:'',
     saldo: undefined
   };
+  @ViewChild('botonCerrar') botonCerrar!: ElementRef;
 
 
   constructor(private clientesServicio: ClienteService) { } //Inyectamos el servicio de clientes del tipo CLIENTESERVICE
@@ -35,7 +36,7 @@ export class ClientesComponent {
   }
 
   getSaldoTotal(): number {
-  return this.clientes?.reduce((total, cliente) => total + (cliente.saldo ?? 0), 0) ?? 0;
+  return this.clientes?.reduce((total, cliente) => total + (Number(cliente.saldo) || 0), 0) ?? 0;
   }
   //Retornamos del arreglo de clientes si no es nulo ni indefinido entonces mandamos a llamar el metodo REDUCE
   //Este metodo REDUCE lo vamos a utilizar para reducir la informacion que vamos a proporcionar a un solo valor
@@ -48,11 +49,17 @@ export class ClientesComponent {
   agregar(clienteForm: NgForm) {
     const {value, valid} = clienteForm; //definimos una constante en la cual recibimos el valor de nuestrom formulario y si es valido
     if (valid){
-      //Agregamos la logoica para agregar un cliente
+
+        this.clientesServicio.agregarCliente(value); 
 
       //limpiamos el formulario
       clienteForm.resetForm();
-    }
+      this.cerrarModal();
+    }   
+  }
+
+  private cerrarModal(){
+      this.botonCerrar.nativeElement.click();
     }
 } 
 
