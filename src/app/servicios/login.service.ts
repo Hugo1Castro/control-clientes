@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, authState, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +19,13 @@ export class LoginService {
         .catch(error => reject(error)); //Si algo sale mal (ej: contraseña incorrecta), atrapamos ese error y activamos el reject. Esto le avisa a la aplicación: 'Algo falló, muestra un mensaje de error'
     }); 
   }
+
+  // Para saber el estado de autentificacion del usuario. Obtenemos el usuario logueado 
+  getAuthState(): Observable<any> { // Este metodo regresa un obserbable
+    return authState(this.authService); 
+  } 
+ 
+  logout() { 
+    this.authService.signOut(); 
+  } 
 }

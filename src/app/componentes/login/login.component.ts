@@ -11,28 +11,36 @@ import { LoginService } from '../../servicios/login.service';
 })
 
 export class LoginComponent {
-  email: string | null = null; 
-  password: string | null = null; 
-  mensaje: string | null = null; 
-  
-  
-  constructor( 
-    private router: Router, 
-    private loginService: LoginService 
-  ) { } 
- 
-  login(){ 
-     // Verificación de que email y password no son null 
-    if (this.email && this.password) {   
-      this.loginService.login(this.email, this.password) 
-        .then(() => { 
-          this.router.navigate(['/']); 
-        }) 
-        .catch(error => { 
-          this.mensaje = 'Error al hacer login: ' + error; 
-        }); 
-    } else { 
-      this.mensaje = 'Por favor, ingrese un email y una contraseña válidos.'; 
-    } 
-  } 
-  } 
+  email: string | null = null;
+  password: string | null = null;
+  mensaje: string | null = null;
+
+
+  constructor(
+    private router: Router,
+    private loginService: LoginService
+  ) { }
+
+  ngOnInit() {
+    this.loginService.getAuthState().subscribe(usuario => {
+      if (usuario) {
+        this.router.navigate(['/']);
+      }
+    })
+  }
+
+  login() {
+    // Verificación de que email y password no son null 
+    if (this.email && this.password) {
+      this.loginService.login(this.email, this.password)
+        .then(() => {
+          this.router.navigate(['/']);
+        })
+        .catch(error => {
+          this.mensaje = 'Error al hacer login: ' + error;
+        });
+    } else {
+      this.mensaje = 'Por favor, ingrese un email y una contraseña válidos.';
+    }
+  }
+} 
