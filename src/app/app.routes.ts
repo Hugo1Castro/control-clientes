@@ -3,10 +3,11 @@ import { TableroComponent } from './componentes/tablero/tablero.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { EditarClienteComponent } from './componentes/editar-cliente/editar-cliente.component';
 import { NoEncontradoComponent } from './componentes/no-encontrado/no-encontrado.component';
+import { LoginGuardianService } from './servicios/login-guardian.service';
 
 export const routes: Routes = [
-    { path: '', component: TableroComponent },//Ruta inicial localhost:4200
+    { path: '', component: TableroComponent,  canActivate: [LoginGuardianService] },//Ruta inicial localhost:4200
     { path: 'login', component: LoginComponent },
-    { path: 'cliente/editar/:id', component: EditarClienteComponent },
+    { path: 'cliente/editar/:id', component: EditarClienteComponent,  canActivate: [LoginGuardianService] },
     { path: '**', component: NoEncontradoComponent },
 ];
